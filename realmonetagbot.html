@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monetag Ad Viewer</title>
+
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <!-- Updated Monetag Inline Ad Script -->
+    <script src="https://niphaumeenses.net/vignette.min.js" data-zone="8629454" data-sdk="show_8629454"></script>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .btn {
+            font-size: 1rem;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .btn-primary { background-color: #007bff; color: white; }
+        .btn-success { background-color: #28a745; color: white; }
+        .btn-warning { background-color: #ffc107; color: white; }
+        .btn-danger { background-color: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Watch Monetag Ads</h2>
+        <div>
+            <button id="adButton1" class="btn btn-primary">Watch Ad 1</button>
+            <button id="adButton2" class="btn btn-success">Watch Ad 2</button>
+            <button id="adButton3" class="btn btn-warning">Watch Ad 3</button>
+            <button id="adButton4" class="btn btn-danger">Watch Ad 4</button>
+        </div>
+    </div>
+
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        // Function to show ads
+        function showAd(buttonId) {
+            try {
+                // Check if the Monetag SDK is available
+                if (typeof show_8629454 === "function") {
+                    show_8629454();  // Display the ad using Monetag SDK
+                    toastr.success(`Ad ${buttonId} was displayed successfully!`);
+                } else {
+                    toastr.error('Monetag SDK not loaded correctly.', 'Error');
+                    console.error('Monetag SDK function is missing or not working.');
+                }
+            } catch (error) {
+                toastr.error('Failed to display the ad.', 'Error');
+                console.error('Ad display error:', error);
+            }
+        }
+
+        // Add click event listeners to buttons
+        document.getElementById('adButton1').addEventListener('click', () => showAd(1));
+        document.getElementById('adButton2').addEventListener('click', () => showAd(2));
+        document.getElementById('adButton3').addEventListener('click', () => showAd(3));
+        document.getElementById('adButton4').addEventListener('click', () => showAd(4));
+    </script>
+</body>
+</html>
